@@ -44,7 +44,6 @@ export function AttendanceTable({
             <TableCell>#{staff.id}</TableCell>
             <TableCell className="flex gap-3 items-center">
               <Avatar>
-                <AvatarImage src="/avatar.png" />
                 <AvatarFallback>{staff.name[0]}</AvatarFallback>
               </Avatar>
               <div>

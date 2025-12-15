@@ -30,7 +30,7 @@ export default function AttendancePage() {
     <div className="flex-1 flex flex-col ml-16">
       <div className="w-full">
         <div className="flex flex-row items-center justify-between px-4 mt-10">
-          <h2 className="text-xl font-semibold">Staff (22)</h2>
+          <h2 className="text-xl font-semibold">Staff ({data.length})</h2>
           <div className="flex gap-2">
             <Button className="bg-primary text-primary-foreground">Add Staff</Button>
             <Button variant="secondary">Sort by</Button>
