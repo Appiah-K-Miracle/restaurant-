@@ -12,7 +12,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "RestaurantPOS - Dashboard",
   description: "Modern Restaurant POS Dashboard",
-  generator: "v0.app",
+ 
 }
 
 export default function RootLayout({

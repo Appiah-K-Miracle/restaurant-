@@ -28,6 +28,8 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 export interface StaffData {
   id?: string;
@@ -106,27 +108,30 @@ export function AddEditStaffSheet({
           </SheetTitle>
         </SheetHeader>
 
-        <div className="flex flex-col gap-6 py-6">
+        <div className="flex flex-col gap-6 py-6 px-6">
           {/* Profile Image Section */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-24 h-24 rounded-lg bg-muted/50 flex items-center justify-center overflow-hidden">
+          <div className="flex flex-col justify-center items-start w-full">
+            <div className="flex flex-col items-center"> 
+            <div className="w-40 h-40 rounded-lg bg-neutral-300 dark:bg-neutral-900 flex items-center justify-center">
               {formData.profileImage ? (
-                <img
+                <Image
                   src={formData.profileImage}
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <ImageIcon className="w-10 h-10 text-muted-foreground" />
+                <ImageIcon className="w-20 h-20 text-muted-foreground dark:text-neutral-400" />
+
               )}
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-sm text-primary hover:text-primary/90"
+            <Link
+              href="/profile"
+               
+              className=" text-xs text-primary underline   mt-2 "
             >
               Change Profile Picture
-            </Button>
+            </Link>
+            </div>
           </div>
 
           {/* Form Fields */}
@@ -222,7 +227,7 @@ export function AddEditStaffSheet({
                       id="dob"
                       variant="outline"
                       className={cn(
-                        "h-10 w-full justify-start text-left font-normal",
+                        "h-10 w-full justify-start text-left font-normal bg-neutral-300",
                         !formData.dateOfBirth && "text-muted-foreground"
                       )}
                     >
@@ -324,12 +329,12 @@ export function AddEditStaffSheet({
 
         {/* Footer Buttons */}
         <SheetFooter className="flex flex-row justify-end gap-3">
-          <Button variant="outline" onClick={handleCancel}>
+          <Button variant="outline" onClick={handleCancel} className="hover:bg-gray-100 hover:text-gray-600">
             Cancel
           </Button>
           <Button
             onClick={handleSubmit}
-            className="bg-pink-500 hover:bg-pink-600 text-white"
+            className="bg-primary hover:bg-primary/90 text-white"
           >
             Confirm
           </Button>
