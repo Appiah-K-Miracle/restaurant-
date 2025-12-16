@@ -1,8 +1,10 @@
 "use client";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Eye, Pencil, Trash2 } from "lucide-react";
+import { AddEditStaffSheet, StaffData } from "@/components/staff/AddEditStaffSheet";
 
 const staff = Array.from({ length: 12 }).map((_, i) => ({
   id: `#10${i}`,
@@ -16,13 +18,45 @@ const staff = Array.from({ length: 12 }).map((_, i) => ({
 }));
 
 export default function StaffManagementTable() {
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [sheetMode, setSheetMode] = useState<"add" | "edit">("add");
+  const [selectedStaff, setSelectedStaff] = useState<StaffData | undefined>(undefined);
+
+  const handleAddStaff = () => {
+    setSheetMode("add");
+    setSelectedStaff(undefined);
+    setSheetOpen(true);
+  };
+
+  const handleEditStaff = (staffMember: typeof staff[0]) => {
+    setSheetMode("edit");
+    setSelectedStaff({
+      id: staffMember.id,
+      name: staffMember.name,
+      email: staffMember.email,
+      role: staffMember.role,
+      phone: staffMember.phone,
+      salary: staffMember.salary,
+      shiftStartTime: "09:00",
+      shiftEndTime: "18:00",
+      address: "",
+      additionalDetails: "",
+    });
+    setSheetOpen(true);
+  };
+
+  const handleSaveStaff = (data: StaffData) => {
+    console.log("Saving staff data:", data);
+    // TODO: Implement actual save logic
+  };
+
   return (
     <div className="flex-1 flex flex-col ml-16">
       <div className="w-full ">
         <div className="flex flex-row items-center justify-between px-4 mt-10">
           <h2 className="text-xl font-semibold">Staff (22)</h2>
           <div className="flex gap-2">
-            <Button className="bg-primary text-primary-foreground">Add Staff</Button>
+            <Button className="bg-primary text-primary-foreground" onClick={handleAddStaff}>Add Staff</Button>
             <Button variant="secondary">Sort by</Button>
           </div>
         </div>
@@ -75,7 +109,7 @@ export default function StaffManagementTable() {
                     <td className="p-3">
                       <div className="flex justify-end gap-2">
                         <Button size="icon" variant="secondary"><Eye size={16} /></Button>
-                        <Button size="icon" variant="secondary"><Pencil size={16} /></Button>
+                        <Button size="icon" variant="secondary" onClick={() => handleEditStaff(s)}><Pencil size={16} /></Button>
                         <Button size="icon" variant="destructive"><Trash2 size={16} /></Button>
                       </div>
                     </td>
@@ -86,6 +120,14 @@ export default function StaffManagementTable() {
           </div>
         </div>
       </div>
+
+      <AddEditStaffSheet
+        open={sheetOpen}
+        onOpenChange={setSheetOpen}
+        mode={sheetMode}
+        initialData={selectedStaff}
+        onSave={handleSaveStaff}
+      />
     </div>
   );
 }
