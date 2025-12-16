@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,7 @@ const staff = Array.from({ length: 12 }).map((_, i) => ({
 }));
 
 export default function StaffManagementTable() {
+  const router = useRouter();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sheetMode, setSheetMode] = useState<"add" | "edit">("add");
   const [selectedStaff, setSelectedStaff] = useState<StaffData | undefined>(undefined);
@@ -48,6 +50,10 @@ export default function StaffManagementTable() {
   const handleSaveStaff = (data: StaffData) => {
     console.log("Saving staff data:", data);
     // TODO: Implement actual save logic
+  };
+
+  const handleViewStaff = (staffId: string) => {
+    router.push(`/staff/${staffId}`);
   };
 
   return (
@@ -108,7 +114,7 @@ export default function StaffManagementTable() {
                     <td className="p-3">{s.timing}</td>
                     <td className="p-3">
                       <div className="flex justify-end gap-2">
-                        <Button size="icon" variant="secondary"><Eye size={16} /></Button>
+                        <Button size="icon" variant="secondary" onClick={() => handleViewStaff(s.id)}><Eye size={16} /></Button>
                         <Button size="icon" variant="secondary" onClick={() => handleEditStaff(s)}><Pencil size={16} /></Button>
                         <Button size="icon" variant="destructive"><Trash2 size={16} /></Button>
                       </div>
