@@ -90,7 +90,10 @@ export function AddEditStaffSheet({
     onOpenChange(false);
   };
 
-  const handleFieldChange = (field: keyof StaffData, value: any) => {
+  const handleFieldChange = (
+    field: keyof StaffData,
+    value: string | Date | undefined
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
