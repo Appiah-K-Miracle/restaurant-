@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -17,8 +16,6 @@ const staff = Array.from({ length: 12 }).map((_, i) => ({
 }));
 
 export default function StaffManagementTable() {
-  const router = useRouter();
-  
   return (
     <div className="flex-1 flex flex-col ml-16">
       <div className="w-full ">
@@ -32,7 +29,9 @@ export default function StaffManagementTable() {
 
         <div className="my-10 flex gap-2 mx-4">
           <Button variant="secondary" className="bg-primary text-primary-foreground">Staff Management</Button>
-          <Button variant="ghost" onClick={() => router.push("/staff/attendance")}>Attendance</Button>
+          <Button variant="ghost" disabled className="cursor-not-allowed opacity-50">
+  Coming Soon
+</Button>
         </div>
 
         <div>
