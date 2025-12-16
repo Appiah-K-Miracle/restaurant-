@@ -20,7 +20,8 @@ import Link from "next/link";
 
 // Mock staff data - in a real app, this would come from an API or database
 const getStaffById = (id: string) => {
-  // This is mock data - replace with actual data fetching
+  // NOTE: This always returns the same staff member for demo purposes
+  // In a real application, this would fetch data based on the id parameter
   return {
     id: id,
     name: "Watson Joyce",
@@ -103,7 +104,7 @@ export default function StaffDetailPage({ params }: { params: Promise<{ id: stri
               <div className="lg:col-span-1">
                 <div className="flex flex-col items-center gap-6">
                   {/* Profile Image */}
-                  <div className="w-48 h-48 rounded-2xl bg-neutral-300 dark:bg-neutral-800 flex items-center justify-center overflow-hidden">
+                  <div className="w-48 h-48 rounded-2xl bg-muted flex items-center justify-center overflow-hidden">
                     {staff.profileImage ? (
                       <img
                         src={staff.profileImage}
